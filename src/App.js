@@ -1,25 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import React ,{Component } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import './App.css';
+import Home from './Home';
+import Login from './Login';
+import PlaceOrder from './PlaceOrder';
+import OrderSuccessful from './OrderSuccessful';
+import ViewOrder from './ViewOrder';
+
+class App extends Component{
+
+  constructor(props) {
+    super(props);
+    this.state = { apiResponse: "" };
+  }
+
+callAPI() {
+    fetch("http://localhost:9000/TestAPI")
+        .then(res => res.text())
+        .then(res => this.setState({ apiResponse: res }));
+}
+
+componentWillMount() {
+    this.callAPI();
+}
+    render(){
+      return (
+        <Router>
+          <div>
+              
+            <Routes>
+              <Route path="/" element={<Login />} />
+              <Route path="/home/:LoginId" element={<Home />} />
+              <Route path="/place-order/:LoginId" element={<PlaceOrder/>} />
+              <Route path="/view-order/:LoginId" element={<ViewOrder/>} />
+              <Route path="/place-order/:LoginId/confirmation" element={<OrderSuccessful/>}/>
+            </Routes>
+          </div>
+        </Router>
+      );
+    }
+    
+    
+  
 }
 
 export default App;

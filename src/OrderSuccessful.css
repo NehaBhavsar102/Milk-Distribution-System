@@ -1,0 +1,63 @@
+.order-successful {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+    background-color: #f4f4f4;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .order-successful h1 {
+    font-size: 2rem;
+    color: #33aaff;
+    position: relative;
+    top: 50px; /* Adjust this value to position the message lower */
+    z-index: 1; /* Ensure the message is on top of the pseudo-elements */
+  }
+  
+  .sparkle::before,
+  .sparkle::after {
+    content: '✨';
+    position: absolute;
+    opacity: 0;
+  }
+  
+  .sparkle::before {
+    top: 0;
+    left: 50%;
+    animation: sparkle 2s linear infinite;
+    transform: translateX(-50%);
+  }
+  
+  .sparkle::after {
+    top: 20px; /* Adjust this value to control the vertical position of the sparkle */
+    left: 50%;
+    animation: sparkle 1.5s linear infinite;
+    transform: translateX(-50%);
+  }
+  
+  @keyframes sparkle {
+    0% {
+      opacity: 0;
+      transform: translateY(0);
+    }
+    25% {
+      opacity: 1;
+      transform: translateY(-5px);
+    }
+    50% {
+      opacity: 0;
+      transform: translateY(0);
+    }
+    75% {
+      opacity: 1;
+      transform: translateY(-5px);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(0);
+    }
+  }
+  

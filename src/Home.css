@@ -1,0 +1,35 @@
+/* Home.css */
+
+  
+
+  
+
+  /* Other Section Styles */
+  .about-section,
+  .info-section {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin: 20px 0;
+  }
+  
+  .info-section h4 {
+    color: #555;
+  }
+  
+
+.contact-section {
+    background: linear-gradient(to bottom, rgb(0, 0, 1), rgb(4, 21, 98));
+    
+    color: #fff;
+    padding: 20px;
+    margin: 20px 0;
+  }
+  
+  .contact-section h4 {
+    color: #fff;
+  }
+  
+  .contact-text {
+    color: #ccc;
+  }
+  

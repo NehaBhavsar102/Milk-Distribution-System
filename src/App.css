@@ -1,38 +1,175 @@
-.App {
-  text-align: center;
+
+.overlay {
+  position: absolute;
+  top: 3%;
+  left: calc(5% + 100px); 
+  width: 500px;
+  height:400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  background-color: rgba(255, 255, 255, 0.7); 
+  padding: 20px;
+  text-align: left;
+  color: black; 
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.overlay h1 {
+  font-size: 2rem;
+  text-align:left;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.overlay p {
+  font-size: 1.0rem;
 }
 
-.App-header {
-  background-color: #282c34;
+
+.sliding-window {
+  position: fixed;
+  bottom: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  transition: bottom 1s ease-in-out;
+  z-index: 1000;
+}
+
+.sliding-window.show {
+  bottom: 0;
+}
+
+.blur-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  background-color: rgba(255, 255, 255, 0.7);
+  z-index: -1;
+}
+
+.content {
+  position: relative;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.app-container {
+  
+
+  background-size: cover;
+  background-position: center;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  position: relative;
+  
+}
+.app-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.5); /* Adjust the background color and opacity */
+  backdrop-filter: blur(500px); /* Adjust the blur intensity */
+  z-index: -1;
+}
+
+
+.login-form {
+  position: center;
+  margin: 70px auto 0;
+  width: 400px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-control {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-check-label {
+  margin-left: 5px;
+}
+
+.btn-primary {
+  background-color: #0e5db2;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+
+
+/* Navbar.css */
+.navbar {
+  
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.6));
   color: white;
+  padding: 8px 0; /* Further reduced vertical padding */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.App-link {
-  color: #61dafb;
+.navbar-items {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px; /* Slightly reduced horizontal padding */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.navbar-left h2 {
+  margin: 0;
+  font-size: 1.3rem; /* Slightly reduced font size */
 }
+
+.navbar-right a {
+  color: white;
+  margin-left: 15px; /* Reduced spacing */
+  text-decoration: none;
+  font-size: 0.9rem; /* Further reduced font size */
+  transition: color 0.3s ease;
+}
+
+.navbar-right a:hover {
+  color: #ffc107; /* Change color on hover */
+}
+
+
+

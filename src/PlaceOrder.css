@@ -1,0 +1,156 @@
+
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 90%;
+    
+  }
+  /* Add margin to the "Order Type" select element to create space below it */
+  .form-group select {
+    margin-bottom: 10px;
+  }
+  
+  
+  
+  .place-order-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 30px;
+    max-width: 900px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+  }
+  
+  
+  .place-order-heading {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  
+  
+  .order-type-group {
+    margin-bottom: 20px;
+  }
+  
+  
+  .order-type-label {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  
+  .radio-group label {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 16px;
+    color: #555;
+  }
+  
+  
+  .other-order-input {
+    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .other-order-input:hover,
+  .other-order-input:focus {
+    border-color: #3498db;
+    outline: none;
+  }
+  
+  /* Style for the Cancel button */
+  .cancel-button {
+    padding: 10px 20px;
+    background-color: #fff;
+    color: #000;
+    border: 2px solid #000;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 70px;
+  }
+  
+  .cancel-button:hover {
+    background-color: #000;
+    color: #fff;
+  }
+  
+  /* Style for the Place Order button */
+  .place-order-button {
+    padding: 10px 20px;
+    background-color: #054977;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .place-order-button:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Additional styles for the button group */
+  .button-group {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Push buttons to the right */
+    margin-top: 20px;
+  }
+  
+  /* Style for the horizontal line */
+  .horizontal-line {
+    border-top: 1px solid #ccc;
+    margin: 10px 0;
+  }
+  
+  /* Style for the Total Price label and value */
+  .total-price-label {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .total-price-value {
+    font-size: 16px;
+    font-weight:bold;
+    color: #0c0b0b;
+    margin-left: 70px;
+    float: right;
+  }
+  .total-price-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  
+  .place-order-form {
+    display: flex;
+    flex-direction: column; 
+  }
+  
+  
+  .subscription-container {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+  }
+  
+  
+  
+  
+  
+  
