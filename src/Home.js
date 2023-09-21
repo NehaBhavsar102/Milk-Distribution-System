@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
+
 import './App.css'
 
 import './Home.css';
@@ -8,6 +9,8 @@ import ImageCarousel from './ImageCarousel';
 function Home() {
   const [showPlaceOrder, setShowPlaceOrder] = useState(false);
   const { LoginId }=useParams();
+ 
+
   return (
     <div>
     <nav className="navbar">
@@ -36,7 +39,7 @@ function Home() {
         </div>
       </div>
     </nav>
-  
+    <ImageCarousel />
     <div id="about" className="about-section">
       At MilkyNest, we're on a mission to bring health, sustainability, and deliciousness to every household in Pune. As a dedicated plant-based milk distributor, we're committed to providing the finest selection of dairy-free alternatives that cater to diverse preferences and lifestyles.
       </div>

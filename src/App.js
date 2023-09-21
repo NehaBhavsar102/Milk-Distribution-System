@@ -32,6 +32,7 @@ componentWillMount() {
               
             <Routes>
               <Route path="/" element={<Login />} />
+              
               <Route path="/home/:LoginId" element={<Home />} />
               <Route path="/place-order/:LoginId" element={<PlaceOrder/>} />
               <Route path="/view-order/:LoginId" element={<ViewOrder/>} />

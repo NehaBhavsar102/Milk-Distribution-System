@@ -13,7 +13,7 @@ router.post("/", async function (req, res, next) {
     const { LoginId } = req.body;
 
     
-    conn.query('SELECT OrderId,customerName, OrderType, itemQuantity, totalPrice, OrderStatus FROM Customer INNER JOIN orders ON Customer.CustomerId = orders.CustomerId WHERE Customer.LoginId = ?', [LoginId], function (error, results, fields) {
+    conn.query('SELECT orders.OrderId,customerName, OrderType, itemQuantity, totalPrice, OrderStatus FROM orders LEFT JOIN Subscription_Orders ON orders.OrderId = Subscription_Orders.OrderId  JOIN Customer ON Customer.CustomerId = orders.CustomerId WHERE Subscription_Orders.OrderId IS NULL AND Customer.LoginId = ?;', [LoginId], function (error, results, fields) {
       if (error) {
         console.error('Error fetching order data:', error);
         res.status(500).json({ error: 'Internal server error' });

@@ -14,6 +14,7 @@ var alreadyRouter=require("./routes/alreadycustomer")
 var loginRouter=require("./routes/login");
 var getCustomerRouter=require("./routes/getcustomer");
 var deleteOrderRouter=require("./routes/deleteorder");
+var subviewRouter=require("./routes/suborders");
 var app = express();
 
 // view engine setup
@@ -37,6 +38,7 @@ app.use("/alreadycustomer",alreadyRouter);
 app.use("/login",loginRouter);
 app.use("/getcustomer",getCustomerRouter);
 app.use("/deleteorder",deleteOrderRouter);
+app.use("/suborders",subviewRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });

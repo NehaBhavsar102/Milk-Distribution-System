@@ -1,11 +1,13 @@
-import React ,{useRef }  from 'react';
+
+import React, { useRef } from 'react';
+
 import { Carousel } from 'react-bootstrap';
 import App from './App';
 import './App.css';
 function ImageCarousel() {
   return (
-    <Carousel>
-      <Carousel.Item>
+    <div>
+      <div>
         <img
           className="d-block w-100"
           src="https://www.privatebrandsconsortium.com/images/500_F_190994672_f7WTaLIKeTduPKdSp6nLf1EnscCGdjI9.jpg"
@@ -13,6 +15,7 @@ function ImageCarousel() {
           width="800"
           height="534"
         />
+        </div>
          <div className="overlay">
           
           <h1>Why Plant-Based Milk?</h1>
@@ -24,10 +27,10 @@ function ImageCarousel() {
           </div>
           
         </div>
-      </Carousel.Item>
       
       
-    </Carousel>
+      
+    </div>
   );
 }
 

@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
+import React, { useState,Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Login.css';
 import axios from 'axios';
 class LoginPage extends Component {
+  
   constructor() {
+   
     super();
     this.state = {
       activeTab: 'login',
@@ -14,6 +16,8 @@ class LoginPage extends Component {
       signupPassword: '',
       signupPhoneNumber: '',
       signupAddress: '',
+      signupLandmark : '',
+      signupCity: '',
       selectedField: '', 
     };
   }
@@ -37,9 +41,9 @@ class LoginPage extends Component {
       });
   
       if (response.status === 200) {
-        // Login successful, user data is available in response.data.user
+        
         const LoginId  = response.data.user.LoginId;
-       // alert('Login Successful');
+       
         
         window.location.href = `/home/${LoginId}`;
         
@@ -53,17 +57,49 @@ class LoginPage extends Component {
   };
   
 
-  handleSignupSubmit = (e) => {
+  handleSignupSubmit = async (e) => {
     e.preventDefault();
-    // TODO: Add your signup logic here
+    const { signupName,signupAddress,signupLandmark,signupCity } = this.state;
+    const { signupState,signupPhoneNumber} = this.state;
+    const { signupEmail,signupPassword}=this.state;
+    const response = await axios.post('http://localhost:9000/customer', {
+        customerName: signupName,
+        street: signupAddress,
+        landmark:signupLandmark,
+        city:signupCity,
+        state:signupState,
+        phoneNumber:signupPhoneNumber,
+        zipCode:411051,
+        email:signupEmail,
+        password:signupPassword
+      });
+      alert("Sign Up Successful,Please Login");
+      this.setState({
+        signupName: '',
+        signupAddress: '',
+        signupLandmark: '',
+        signupCity: '',
+        signupState: '',
+        signupPhoneNumber: '',
+        signupEmail: '',
+        signupPassword: '',
+        selectedField: '',
+        activeTab: 'login'
+      });
+      
+     
+        
+      
   };
 
   render() {
     const { activeTab, selectedField } = this.state;
-
+    const statesOfIndia = ['Maharashtra'];
+    const cityofMH = ['Pune', 'PMC'];
+    
     return (
       <div className="container mt-5">
-        {/* Center content */}
+        
         <div className=" col-sm-180 ">
           <div className="card"> 
             <div className="card-header">
@@ -145,7 +181,7 @@ class LoginPage extends Component {
                       onClick={() => this.handleFieldSelect('signupEmail')}
                     />
                   </div>
-                  {/* Password */}
+                  
                   <div className={`mb-3 ${selectedField === 'signupPassword' ? 'selected-field' : ''}`}>
                     <label>Password</label>
                     <input
@@ -158,7 +194,7 @@ class LoginPage extends Component {
                       onClick={() => this.handleFieldSelect('signupPassword')}
                     />
                   </div>
-                  {/* Phone Number */}
+                 
                   <div className={`mb-3 ${selectedField === 'signupPhoneNumber' ? 'selected-field' : ''}`}>
                     <label>Phone Number</label>
                     <input
@@ -173,17 +209,70 @@ class LoginPage extends Component {
                   </div>
                  
                   <div className={`mb-3 ${selectedField === 'signupAddress' ? 'selected-field' : ''}`}>
-                    <label>Address</label>
+                    <label>Street</label>
                     <textarea
                       className="form-control"
-                      placeholder="Address"
+                      placeholder="Street"
                       required
                       value={this.state.signupAddress}
                       onChange={(e) => this.setState({ signupAddress: e.target.value })}
                       onClick={() => this.handleFieldSelect('signupAddress')}
                     />
                   </div>
-                  <button type="submit" className="btn btn-dark">
+                  <div className={`mb-3 ${selectedField === 'signupLandmark' ? 'selected-field' : ''}`}>
+                    <label>Landmark</label>
+                    <textarea
+                      className="form-control"
+                      placeholder="Landmark"
+                      required
+                      value={this.state.signupLandmark}
+                      onChange={(e) => this.setState({ signupLandmark: e.target.value })}
+                      onClick={() => this.handleFieldSelect('signupLandmark')}
+                      
+                    />
+                  </div>
+                  <div className={`mb-3 ${selectedField === 'signupState' ? 'selected-field' : ''}`}>
+                    <label>State</label>
+                    <select
+                      
+                      class="form-control"
+                      placeholder="State"
+                      required
+                      value={this.state.signupState}
+                      onChange={(e) => this.setState({ signupState: e.target.value })}
+                      onClick={() => this.handleFieldSelect('signupState')}
+                      
+                    >
+                      <option value="">Select State</option>
+                      {statesOfIndia.map((state) => (
+                        <option key={state} value={state}>
+                          {state}
+                        </option>
+                      ))}
+                    </select>
+              </div>
+
+              <div className={`mb-3 ${selectedField === 'signupCity' ? 'selected-field' : ''}`}>
+                    <label>City</label>
+                    <select
+                      
+                      class="form-control"
+                      placeholder="City"
+                      required
+                      value={this.state.signupCity}
+                      onChange={(e) => this.setState({ signupCity: e.target.value })}
+                      onClick={() => this.handleFieldSelect('signupCity')}
+                      
+                    >
+                      <option value="">Select City</option>
+                      {cityofMH.map((city) => (
+                        <option key={city} value={city}>
+                          {city}
+                        </option>
+                      ))}
+                    </select>
+              </div>
+                  <button type="submit" className="btn btn-dark" >
                     Signup
                   </button>
                   </form>

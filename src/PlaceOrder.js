@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import { useLocation,useParams } from 'react-router-dom';
+import { isFuture } from 'date-fns';
+
 import './PlaceOrder.css';
 import axios from 'axios';
 function PlaceOrder(){
+    const currentDate = new Date();
     const { LoginId } = useParams();
-    const { CustomerId } = useParams();
+    
     const [orderType, setOrderType] = useState('Soya Milk');
     const [itemQuantity, setItemQuantity] = useState(0);
     const [itemPrice] = useState(60);
     const [totalPrice, setTotalPrice] = useState(0);
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState(''); 
+    const [orderDate, setOrderDate] = useState('');
     const [daysDifference, setDaysDifference] = useState(0); 
     const [isSubscriptionOrder, setIsSubscriptionOrder] = useState(false); 
 
@@ -22,6 +26,9 @@ function PlaceOrder(){
         const quantity = parseInt(e.target.value, 10);
         setItemQuantity(quantity);
         setTotalPrice(itemPrice * quantity);
+      };
+      const handleOrderDateChange = (e) => {
+        setOrderDate(e.target.value);
       };
     
       const handleStartDateChange = (e) => {
@@ -43,6 +50,15 @@ function PlaceOrder(){
       };
       const handleSubmit = async (e) => {
         e.preventDefault();
+        if (
+          !orderType ||
+          itemQuantity <= 0 ||
+          (!isSubscriptionOrder && currentDate > orderDate) ||
+          (isSubscriptionOrder && currentDate > startDate && currentDate < endDate)
+        ) {
+          alert('Please fill in all required fields with valid information.');
+          return;
+        }
         try{
             const response = await axios.post('http://localhost:9000/getcustomer', {
                 LoginId:LoginId
@@ -74,7 +90,7 @@ function PlaceOrder(){
 
                  if (res.ok) { 
           
-                   alert("Order Placed");
+                   //alert("Order Placed");
                    window.location.href = `/place-order/${LoginId}/confirmation`;
                     
                   }
@@ -93,8 +109,7 @@ function PlaceOrder(){
     
     return(
         <div>
-        <h1>Place Order</h1>
-        <p>Data received: {LoginId}</p>
+       
         <div className="center-container">
     <div className="place-order-container">
       <h2 className="place-order-heading">Place Your Order</h2>
@@ -114,11 +129,26 @@ function PlaceOrder(){
             id="itemQuantity"
             value={itemQuantity}
             onChange={handleItemQuantityChange}
+            placeholder="required"
           />
         </div>
 
         <div className="form-group">
          
+          
+          {!isSubscriptionOrder && (
+            <>
+            <div className="form-group">
+              <label htmlFor="startDate">Order Date </label>&nbsp;&nbsp;
+              <input
+                type="date"
+                id="orderDate"
+                value={orderDate}
+                onChange={handleOrderDateChange}
+              />
+            </div>
+            </>
+          )}
           <input
             type="checkbox"
             id="subscriptionOrder"

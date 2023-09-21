@@ -9,7 +9,6 @@ const conn = mysql.createConnection({
   database: 'MilkDistribution'
 });
 
-
 conn.connect((err) => {
   if (err) {
     console.log(err);
@@ -26,26 +25,56 @@ router.post('/', async (req, res) => {
       street: req.body.street,
       landmark: req.body.landmark,
       City: req.body.city,
-      
       zipCode: req.body.zipCode,
       phoneNumber: req.body.phoneNumber,
       State: req.body.state
-    
     };
 
-    const insertQuery = `INSERT INTO Customer SET ?`;
+    const signadd = {
+      Email: req.body.email,
+      Pass: req.body.password
+    };
 
-    conn.query(insertQuery, add, (err,result) => {
-      if (err) {
-        console.error('Error storing customer details:', err);
-        res.status(500).json({ error: 'An error occurred while storing customer details' });
-      } else {
-        console.log("Customer Added Successfully");
-        const CustomerId = result.insertId;
-        console.log(CustomerId);
-        res.json({CustomerId});
-      }
-    });
+    // Create an array of promises for each query
+    const queryPromises = [
+      new Promise((resolve, reject) => {
+        const insertQuery = `INSERT INTO Customer SET ?`;
+        conn.query(insertQuery, add, (err, result) => {
+          if (err) {
+            console.error('Error storing customer details:', err);
+            reject(err);
+          } else {
+            console.log("Customer Added Successfully");
+            resolve(result);
+          }
+        });
+      }),
+
+      new Promise((resolve, reject) => {
+        const signupQuery = `INSERT INTO LoggedIn SET ?`;
+        conn.query(signupQuery, signadd, (err, result) => {
+          if (err) {
+            console.error('Error storing signup details:', err);
+            reject(err);
+          } else {
+            console.log("Signup Added Successfully");
+            resolve(result);
+          }
+        });
+      })
+    ];
+
+    // Run both queries concurrently using Promise.all()
+    Promise.all(queryPromises)
+      .then(([customerResult, signupResult]) => {
+        const LoginId = signupResult.insertId;
+        console.log(LoginId);
+        res.json({ LoginId });
+      })
+      .catch((error) => {
+        console.error('An error occurred', error);
+        res.status(500).json({ error: 'An error occurred' });
+      });
   } catch (error) {
     console.error('An error occurred', error);
     res.status(500).json({ error: 'An error occurred' });
