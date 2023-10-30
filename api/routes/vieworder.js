@@ -21,7 +21,7 @@ router.post("/", async function (req, res, next) {
       }
 
       if (results.length === 0) {
-        // Handle the case where no results are found
+        
         res.json({ message: 'No orders found for this phone number.' });
       } else {
         // Send the results as JSON
